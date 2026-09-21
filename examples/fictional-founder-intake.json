@@ -1,0 +1,40 @@
+{
+  "notice": "Fictional example for software testing and demonstration only. It is not legal advice or a real person's record.",
+  "profile": {
+    "name": "Avery Chen",
+    "email": "avery.chen@example.invalid",
+    "location": "Singapore",
+    "field": "robotics systems",
+    "company": "Northstar Robotics (fictional)",
+    "targetRole": "Founder and Chief Product Officer",
+    "desiredStart": "2027-01-15"
+  },
+  "achievements": [
+    {
+      "title": "Led a fictional warehouse robotics launch",
+      "date": "2025-05-10",
+      "claimedCriteria": ["critical", "original"],
+      "sources": [
+        "Fictional board memo",
+        "Fictional customer deployment report",
+        "Fictional technical architecture record"
+      ],
+      "openQuestions": [
+        "Which independent source verifies the impact?",
+        "What evidence distinguishes personal contribution from team output?"
+      ]
+    }
+  ],
+  "timeline": [
+    {
+      "phase": "evidence inventory",
+      "targetDate": "2026-10-15",
+      "status": "planned"
+    },
+    {
+      "phase": "independent review",
+      "targetDate": "2026-11-15",
+      "status": "planned"
+    }
+  ]
+}

@@ -1,0 +1,41 @@
+{
+  "version": "7",
+  "dialect": "sqlite",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "6",
+      "when": 1788820080105,
+      "tag": "0000_white_gwen_stacy",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "6",
+      "when": 1788901489354,
+      "tag": "0001_fuzzy_cassandra_nova",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "6",
+      "when": 1788934990364,
+      "tag": "0002_kind_miek",
+      "breakpoints": true
+    },
+    {
+      "idx": 3,
+      "version": "6",
+      "when": 1788980511397,
+      "tag": "0003_woozy_bill_hollister",
+      "breakpoints": true
+    },
+    {
+      "idx": 4,
+      "version": "6",
+      "when": 1789005255353,
+      "tag": "0004_public_doctor_faustus",
+      "breakpoints": true
+    }
+  ]
+}

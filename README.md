@@ -1,53 +1,107 @@
 # USCOO
 
-O-1A application preparation workspace for founders and immigration professionals.
+Open-source O-1A preparation infrastructure for founders, self-petition teams, and immigration professionals.
 
-[Try USCOO](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [Start an assessment](https://www.uscoo.ai/assessment?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [中文介绍](#中文介绍)
+[Live product](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
-> Release preparation: this repository currently contains project documentation. Application source and a license have not yet been published. A standalone deployment is not yet verified.
+USCOO turns a founder's scattered achievements into a structured preparation workflow: assess evidence against the O-1A criteria, identify gaps, organize source material, coordinate the petitioner company, generate reviewable working drafts, and hand a coherent record to counsel.
 
-## Why USCOO
+> USCOO is preparation software, not a law firm. It does not provide legal advice or guarantee eligibility, filing, or approval. Confirm current forms, fees, filing addresses, and case strategy with USCIS and qualified counsel.
 
-USCOO grew out of a founder's experience preparing an O-1A application. It brings scattered achievements, supporting evidence, preparation tasks, and timelines into an organized workflow.
+## What v0.1 includes
 
-Whether a founder is in the United States or elsewhere, the goal is to help describe achievements in relation to the O-1A evidentiary criteria and identify what supporting material still needs to be collected. An assessment is a preparation aid, not an eligibility determination or an approval prediction.
+- A bilingual English/Chinese founder assessment.
+- Evidence mapping across the eight regulatory O-1A criteria.
+- Case workspace, timeline, task gates, audit history, and versioned records.
+- Company/petitioner preparation and filing-readiness checklists.
+- File intake, DOCX/PDF extraction, draft generation, and ZIP export.
+- Counsel handoff, expiring share links, support intake, and admin review.
+- Optional OpenAI-assisted drafting and optional Resend email delivery.
+- D1 persistence and R2 object storage for a Sites-hosted deployment.
 
-## For founders
+## Intended users
 
-The hosted application provides workflows for assessing achievements, organizing evidence, planning preparation tasks, and preparing materials for a conversation with immigration counsel. You can use the online application without installing code.
+- Founders translating non-U.S. achievements into evidence that a U.S. reviewer can verify.
+- Self-directed applicants who need structure before engaging counsel.
+- Immigration firms exploring transparent, human-reviewed AI workflows.
+- Builders researching evidence-centered legal operations software.
 
-## For immigration professionals
+## Quick start
 
-We welcome feedback and exploratory collaboration on structured client intake, evidence organization, preparation timelines, and attorney handoff materials. These are collaboration areas, not a claim that a production multi-client law-firm system or public API is available.
+Requirements: Node.js 22.13+ and pnpm.
 
-For collaboration inquiries: **coo@uscoo.ai**. Please describe the workflow you would like to improve; do not send client case files in an initial inquiry.
+```bash
+git clone https://github.com/zhuangsirandy/uscoo.git
+cd uscoo
+pnpm install
+cp .env.example .env.local
+pnpm dev
+```
 
-## Release scope
+The public assessment and marketing experience run without third-party API keys. The authenticated case workspace is designed for **ChatGPT Sites hosting** and trusts Sites-provided authentication headers. It also expects the `DB` D1 and `BUCKET` R2 bindings declared in `.openai/hosting.json`.
 
-The first source release is intended to include reviewed application code, setup documentation, configuration examples, and synthetic examples. It will exclude production credentials, user records, uploaded evidence, personal petition documents, and production Git history.
+For a complete backend verification without a hosted account:
 
-Current portability review has identified platform-specific authentication and build configuration. Authentication currently relies on identity headers supplied by a trusted hosting layer. Those headers must not be trusted directly on a self-hosted public server. A verified authentication integration and deployment instructions are release requirements.
+```bash
+pnpm build
+pnpm test
+```
 
-See [release readiness](docs/RELEASE_READINESS.md) for remaining work. There are no installation instructions until they have been validated.
+The integration suite starts isolated local D1/R2 resources and uses synthetic identities only.
 
-## Project boundaries
+## Platform boundary
 
-USCOO supports preparation and organization. It is not a law firm and does not provide legal representation, guarantee outcomes, or submit a petition on your behalf. Case-specific legal judgments remain with qualified counsel. Do not submit personal immigration records in public issues or pull requests.
+v0.1 is source-available as a complete product snapshot, but its deployment adapter is intentionally Sites-specific:
 
-Maintenance is best-effort; no response-time commitment or feature delivery schedule is offered.
+- `app/chatgpt-auth.ts` reads authenticated-user headers injected by Sites.
+- `lib/case-store.ts` reads D1, R2, and runtime values from Cloudflare bindings.
+- `.openai/hosting.json` contains placeholder binding names and **no production project ID**.
+
+To run the workspace on another platform, replace the authentication adapter and provide equivalent SQL/object-storage bindings. See [Deployment](docs/DEPLOYMENT.md) and [Architecture](docs/ARCHITECTURE.md).
+
+## Configuration
+
+| Variable               |   Required | Purpose                                                       |
+| ---------------------- | ---------: | ------------------------------------------------------------- |
+| `OPENAI_API_KEY`       |         No | Enables AI-assisted drafting.                                 |
+| `OPENAI_MODEL`         |    With AI | Model used by the drafting service.                           |
+| `MODEL_DAILY_LIMIT`    |         No | Per-project daily model-call ceiling; default `20`.           |
+| `RESEND_API_KEY`       |         No | Enables transactional email.                                  |
+| `USCOO_EMAIL_FROM`     | With email | Verified sender, for example `USCOO <reports@example.org>`.   |
+| `USCOO_ADMIN_USER_IDS` |  For admin | Comma-separated authenticated user IDs allowed into `/admin`. |
+
+Never commit `.env`, applicant documents, database exports, production IDs, or credentials.
+
+## Repository map
+
+```text
+app/             routes, APIs, auth boundary, metadata
+components/      product and UI components
+db/              Drizzle schema
+drizzle/         D1 migrations
+lib/             domain, storage, documents, AI and validation
+scripts/         integration and translation checks
+docs/            architecture, deployment, privacy and release notes
+examples/        fictional, non-production sample data
+```
+
+## Development
+
+```bash
+pnpm lint
+pnpm format --check
+pnpm build
+pnpm test
+```
+
+Open a focused issue before a large change. Do not place real immigration records or personal data in issues, pull requests, fixtures, screenshots, or logs.
+
+## 中文说明
+
+USCOO 是面向创始人、个人准备者与移民专业人士的 O-1A 申请准备工作台。它帮助用户将分散的成就与证据映射到八项标准，识别证据缺口，管理申请公司、时间线、工作稿与律师交接。
+
+本项目不提供法律意见，也不替代持牌律师。开源的意义是让证据组织、流程设计和 AI 辅助工作方式可以被审阅、复用和共同改进；真实个案资料不得提交到 GitHub。
 
 ## License
 
-A license will be added after the source and third-party notices are reviewed. This preparation repository does not yet grant an open-source license.
-
-## 中文介绍
-
-USCOO 是面向创始人与移民专业人士的 O-1A 申请准备工作台，源于一位创始人整理自身 O-1A 申请经验的实践。
-
-无论身在美国还是其他国家，申请者都可以通过系统梳理成就、对照 O-1A 证据标准、整理分散材料，并规划申请准备时间线。评估结果用于帮助准备材料，不代表资格认定或获批预测。
-
-- **个人申请者**：前往 [uscoo.ai](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) 体验。
-- **律所与移民专业人士**：欢迎围绕客户资料收集、证据整理、时间线和律师沟通材料提出合作需求，联系 **coo@uscoo.ai**。
-- **开发者**：源代码、许可证与经过验证的部署说明正在准备中，目前尚不能通过本仓库独立部署。
-
-首版将使用虚构示例，不包含生产用户资料或个人申请原件。项目采用尽力维护方式，不承诺固定响应时间。USCOO 不提供律师代理服务，也不保证申请结果。
+Code is licensed under the [Apache License 2.0](LICENSE). The license does not grant permission to imply endorsement by USCOO or to misuse USCOO branding; see [TRADEMARKS.md](TRADEMARKS.md).
