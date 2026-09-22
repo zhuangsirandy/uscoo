@@ -1,5 +1,6 @@
 import { env } from 'cloudflare:workers';
 import type { CaseProject, RecordItem, CaseData } from './case-domain';
+import { validateEvidenceGraph, type EvidenceGraph } from './evidence-graph';
 export class HttpError extends Error {
   constructor(
     public status: number,
@@ -226,6 +227,20 @@ export function writeRecord(
   body: unknown,
   token: string,
 ) {
+  if (
+    kind === 'evidence' &&
+    body &&
+    typeof body === 'object' &&
+    'evidenceGraph' in body &&
+    body.evidenceGraph
+  ) {
+    const errors = validateEvidenceGraph(body.evidenceGraph as EvidenceGraph);
+    if (errors.length)
+      throw new HttpError(
+        400,
+        '证据图谱结构无法保存，请检查来源、观察、主张和验证关系。',
+      );
+  }
   const time = now();
   return db()
     .prepare(
