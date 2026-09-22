@@ -1108,5 +1108,6 @@
   "申请包快照校验未通过。": "The petition package snapshot failed verification.",
   "请选择支持的官方来源。": "Choose a supported official source.",
   "请确认仅分享匿名任务数量。": "Confirm that only anonymous task counts will be shared.",
-  "操作不存在。": "This action does not exist."
+  "操作不存在。": "This action does not exist.",
+  "证据图谱结构无法保存，请检查来源、观察、主张和验证关系。": "The evidence graph could not be saved. Check the source, observation, assertion, and verification relationships."
 }
