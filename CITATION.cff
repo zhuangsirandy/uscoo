@@ -1,0 +1,24 @@
+cff-version: 1.2.0
+message: "If USCOO supports your research or workflow, please cite this repository."
+title: "USCOO: Open-source O-1A preparation workspace"
+type: software
+authors:
+  - family-names: Zhao
+    given-names: Andy
+    affiliation: DeepJob
+    email: coo@uscoo.ai
+repository-code: "https://github.com/zhuangsirandy/uscoo"
+url: "https://www.uscoo.ai/"
+license: Apache-2.0
+abstract: >-
+  USCOO is an open-source preparation workspace for founders filing through
+  their own company and immigration professionals. It models O-1A preparation
+  as an evidence graph with provenance, contribution boundaries, uncertainty,
+  and counsel handoff.
+keywords:
+  - O-1A
+  - immigration technology
+  - legal technology
+  - evidence graph
+  - founders
+  - provenance
