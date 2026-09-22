@@ -16,6 +16,49 @@ An achievement becomes useful preparation data only when the system can answer:
 
 The graph preserves those relationships. It does not decide eligibility and it does not replace legal judgment.
 
+## v0.2 schema direction
+
+The v0.2 direction makes the audit trail explicit while remaining compatible with the existing JSON record envelope. Existing records can continue to live in `records.body`; a graph is an additive structure inside a record, not a destructive replacement.
+
+```text
+SourceArtifact ──observed by──> Observation ──grounds──> Assertion
+                                                        │
+                                                        └──checked by──> VerificationActivity
+
+Assertion ──supports / contradicts / supersedes──> Assertion
+```
+
+### SourceArtifact
+
+Describes where a record came from. Useful provenance fields include a stable locator, immutable content digest, producer, published and observed timestamps, extraction method/version, schema version, import run ID, redaction status, and chain-of-custody note.
+
+### Observation
+
+Describes what was actually seen in a source, including a page, passage, table, timestamp, observer, and method. An observation is not an interpretation.
+
+### Assertion
+
+Expresses a claim about a person, company, achievement, outcome, or relationship. Its `basis` must distinguish `source-observed`, `founder-statement`, and `model-inferred`. A founder statement is a lead, never an automatic finding.
+
+Assertions may be `unresolved`, `supported`, `contested`, or `superseded`. Conflicting assertions remain separate and are connected with explicit `supports`, `contradicts`, or `supersedes` relations. The system must not replace a prior assertion with a confidence score.
+
+### VerificationActivity
+
+Represents one verification event attached to an assertion—not to the source alone. It records the verifier, method, policy or criterion, result, time, scope, and limitations. If two verification activities disagree, both remain in history and the assertion stays `unresolved` until an explicit decision is recorded.
+
+The optional `currentEffectiveVerificationId` on an assertion identifies the verification currently used for a working view. It never deletes or hides other verification activities and requires an `effectiveReason`, `effectiveAt`, and decision record.
+
+The reference implementation is [`lib/evidence-graph.ts`](../lib/evidence-graph.ts), and the fictional conflicting-review fixture is in [`examples/fictional-founder-intake.json`](../examples/fictional-founder-intake.json).
+
+## Compatibility and migration policy
+
+- v0.1 records remain readable without a graph.
+- v0.2 graph fields are additive and versioned with `schemaVersion: "0.2"`.
+- Existing `record_versions` and audit entries remain authoritative history.
+- No migration may delete, overwrite, or collapse a prior assertion or verification.
+- AI-generated fields must remain visibly separate from source-observed fields.
+- Structural validation confirms relationships; it does not make a legal conclusion or confirm eligibility.
+
 ## The model
 
 ```mermaid
@@ -58,6 +101,7 @@ This repository demonstrates the evidence-centered workflow, data model, validat
 - What is the smallest useful evidence graph for a founder's first achievement?
 - Which provenance fields make counsel review faster without creating unnecessary data collection?
 - How should a graph represent conflicting sources or a later correction?
+- When repeated verifications disagree, which explicit facts are required before a reviewer may designate one as currently effective?
 - Which parts should remain deterministic and which parts may receive optional AI assistance?
 
 Open an issue or discussion with a fictional example. Please do not upload real immigration records.
