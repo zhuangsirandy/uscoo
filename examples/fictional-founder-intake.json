@@ -36,5 +36,96 @@
       "targetDate": "2026-11-15",
       "status": "planned"
     }
-  ]
+  ],
+  "evidenceGraph": {
+    "schemaVersion": "0.2",
+    "sources": [
+      {
+        "id": "source-board-memo",
+        "stableLocator": "fictional://northstar/board-memo-2025-05",
+        "contentDigest": "sha256:fictional-board-memo",
+        "producer": "Northstar Robotics (fictional)",
+        "publishedAt": "2025-05-20",
+        "schemaVersion": "fictional-board-memo-v1",
+        "redactionStatus": "reviewed"
+      },
+      {
+        "id": "source-deployment-report",
+        "stableLocator": "fictional://northstar/deployment-report-2025-06",
+        "contentDigest": "sha256:fictional-deployment-report",
+        "producer": "Northstar Robotics (fictional)",
+        "publishedAt": "2025-06-30",
+        "schemaVersion": "fictional-deployment-report-v1",
+        "redactionStatus": "reviewed"
+      }
+    ],
+    "observations": [
+      {
+        "id": "observation-board-adoption",
+        "sourceId": "source-board-memo",
+        "locator": "page 2, fictional customer summary",
+        "value": "Three fictional customers adopted the system.",
+        "observedAt": "2026-10-20",
+        "observedBy": "fictional-reviewer-a",
+        "method": "manual document review"
+      },
+      {
+        "id": "observation-deployment-adoption",
+        "sourceId": "source-deployment-report",
+        "locator": "table 1, fictional deployment count",
+        "value": "Two fictional customers completed deployment.",
+        "observedAt": "2026-11-15",
+        "observedBy": "fictional-reviewer-b",
+        "method": "independent source comparison"
+      }
+    ],
+    "assertions": [
+      {
+        "id": "assertion-customer-adoption",
+        "subject": "Avery Chen's robotics system",
+        "predicate": "hasFictionalCompletedCustomerAdoptions",
+        "object": 3,
+        "basis": "source-observed",
+        "observationIds": [
+          "observation-board-adoption",
+          "observation-deployment-adoption"
+        ],
+        "status": "unresolved"
+      },
+      {
+        "id": "assertion-personal-contribution",
+        "subject": "Avery Chen",
+        "predicate": "personallyDecided",
+        "object": "deployment architecture and customer rollout sequence",
+        "basis": "founder-statement",
+        "observationIds": [],
+        "status": "supported"
+      }
+    ],
+    "verifications": [
+      {
+        "id": "verification-board-review",
+        "assertionId": "assertion-customer-adoption",
+        "verifier": "fictional-reviewer-a",
+        "method": "manual document review",
+        "policyOrCriterion": "fictional provenance policy",
+        "result": "supports",
+        "verifiedAt": "2026-10-20T00:00:00Z",
+        "scope": "board memo only",
+        "limitations": ["No independent customer confirmation"]
+      },
+      {
+        "id": "verification-independent-review",
+        "assertionId": "assertion-customer-adoption",
+        "verifier": "fictional-reviewer-b",
+        "method": "independent source comparison",
+        "policyOrCriterion": "fictional provenance policy",
+        "result": "contradicts",
+        "verifiedAt": "2026-11-15T00:00:00Z",
+        "scope": "deployment report only",
+        "limitations": ["The report may exclude pilots"]
+      }
+    ],
+    "relations": []
+  }
 }
