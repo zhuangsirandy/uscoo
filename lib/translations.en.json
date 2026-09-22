@@ -1,4 +1,5 @@
 {
+  "此工作台必须运行在已配置的 ChatGPT Sites 环境中。请先完成可信身份适配。": "This workspace must run in a configured ChatGPT Sites environment. Set up a trusted identity adapter first.",
   "你提到的线索": "Experience you reported",
   "还需要了解": "Needs clarification",
   "暂未提到": "Not reported yet",
