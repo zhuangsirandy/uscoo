@@ -21,10 +21,11 @@
     "start": "wrangler dev --config dist/server/wrangler.json",
     "lint": "oxlint",
     "format": "oxfmt",
-    "test": "pnpm test:cases && pnpm test:email && pnpm test:auth-boundary && pnpm test:translations",
+    "test": "pnpm test:cases && pnpm test:email && pnpm test:auth-boundary && pnpm test:evidence-graph && pnpm test:translations",
     "test:cases": "node scripts/test-cases.mjs",
     "test:email": "node scripts/test-email.mjs",
     "test:auth-boundary": "node scripts/test-auth-boundary.mjs",
+    "test:evidence-graph": "node --experimental-strip-types scripts/test-evidence-graph.mjs",
     "test:translations": "node scripts/audit-translations.mjs"
   },
   "dependencies": {
