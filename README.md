@@ -1,12 +1,34 @@
 # USCOO
 
-Open-source O-1A preparation infrastructure for founders filing through their own company, and immigration professionals.
+Open-source O-1A preparation workspace for founders filing through their own company and immigration professionals.
 
-[Live product](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+Turn scattered founder facts into an evidence graph, a petitioner-company work plan, reviewable drafts, and a counsel-ready record.
+
+![USCOO workspace overview](https://uscoo-founding-beta.sites.openai.com/og.png)
+
+[Live Demo](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [60-second overview](docs/EVIDENCE_GRAPH.md#the-60-second-version) · [Golden Case #001-S](docs/GOLDEN_CASE_001-S.md) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 USCOO turns a founder's scattered achievements into a structured preparation workflow: assess evidence against the O-1A criteria, identify gaps, organize source material, coordinate the petitioner company, generate reviewable working drafts, and hand a coherent record to counsel.
 
 > USCOO is preparation software, not a law firm. It does not provide legal advice or guarantee eligibility, filing, or approval. Confirm current forms, fees, filing addresses, and case strategy with USCIS and qualified counsel.
+
+## Start here
+
+In 60 seconds:
+
+1. Start with one concrete achievement.
+2. Separate the founder's personal decision and contribution from the team's result.
+3. Link each claim to a source, date, page or passage, and verification status.
+4. Map the evidence to the O-1A criteria and identify what is missing.
+5. Continue with a founder-led filing through the petitioning company or prepare a counsel handoff.
+
+### Choose your path
+
+- **Founder** — [open the Live Demo](https://www.uscoo.ai/) and see the guided assessment before creating a workspace.
+- **Immigration professional** — read the [Golden Case #001-S](docs/GOLDEN_CASE_001-S.md) and the [Evidence Graph note](docs/EVIDENCE_GRAPH.md).
+- **Developer** — run the fictional test case locally with the [Quick start](#quick-start), then review the [Architecture](docs/ARCHITECTURE.md) and [Deployment](docs/DEPLOYMENT.md).
+
+The repository contains only fictional or synthetic examples. Do not add real applicant records, identity documents, credentials, or production exports.
 
 ## What v0.1 includes
 
@@ -25,6 +47,12 @@ USCOO turns a founder's scattered achievements into a structured preparation wor
 - Self-directed applicants who need structure before engaging counsel.
 - Immigration firms exploring transparent, human-reviewed AI workflows.
 - Builders researching evidence-centered legal operations software.
+
+## Why Evidence Graph?
+
+An O-1A preparation record is not just a resume or a checklist. It connects achievements, personal contribution, outcomes, sources, petitioner facts, work arrangements, criteria, open questions, and filing events. USCOO makes those relationships explicit so a founder, reviewer, and counsel can inspect the same facts without silently turning an unverified claim into a legal conclusion.
+
+Read the technical note: [O-1A Preparation as an Evidence Graph](docs/EVIDENCE_GRAPH.md).
 
 ## Quick start
 
