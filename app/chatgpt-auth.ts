@@ -20,11 +20,7 @@ const SIGN_OUT_PATH = '/signout-with-chatgpt';
 const CALLBACK_PATH = '/callback';
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
-  if (!sitesAuthConfigured()) {
-    throw new Error(
-      'USCOO requires a trusted ChatGPT Sites runtime before authenticated workspace access is enabled.',
-    );
-  }
+  if (!sitesAuthConfigured()) return null;
   const requestHeaders = await headers();
   const id = requestHeaders.get(USER_ID_HEADER);
   const email = requestHeaders.get(USER_EMAIL_HEADER);
@@ -48,6 +44,11 @@ export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
 export async function requireChatGPTUser(
   returnTo: string,
 ): Promise<ChatGPTUser> {
+  if (!sitesAuthConfigured()) {
+    throw new Error(
+      'USCOO requires a trusted ChatGPT Sites runtime before authenticated workspace access is enabled.',
+    );
+  }
   const user = await getChatGPTUser();
   if (user) return user;
 

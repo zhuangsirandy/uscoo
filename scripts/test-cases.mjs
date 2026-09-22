@@ -22,7 +22,10 @@ const mf = new Miniflare({
   compatibilityFlags: ['nodejs_compat'],
   d1Databases: ['DB'],
   r2Buckets: ['BUCKET'],
-  bindings: { USCOO_ADMIN_USER_IDS: 'synthetic-admin' },
+  bindings: {
+    USCOO_ADMIN_USER_IDS: 'synthetic-admin',
+    USCOO_SITES_AUTH_TRUSTED: 'true',
+  },
   cf: false,
   assets: {
     directory: resolve('dist/client'),
@@ -107,6 +110,12 @@ try {
   ok('Unauthenticated API denies access', () => assert.equal(r.status, 401));
   r = await call(accountApi, 'GET', null, null);
   ok('Account endpoint also requires sign-in', () =>
+    assert.equal(r.status, 401),
+  );
+  r = await call(accountApi, 'GET', null, null, {
+    'oai-authenticated-user-id': 'forged-only-id',
+  });
+  ok('Incomplete client-supplied identity is rejected', () =>
     assert.equal(r.status, 401),
   );
   r = await call(accountApi);
@@ -341,6 +350,7 @@ try {
     method: 'POST',
     headers: {
       'oai-authenticated-user-id': 'synthetic-user-a',
+      'oai-authenticated-user-email': 'synthetic-user-a@example.invalid',
       'Content-Type': 'application/json',
       origin: 'https://evil.test',
     },

@@ -34,7 +34,10 @@ export function sitesAuthConfigured() {
 
 export function trustedUserId(req: Request) {
   if (!sitesAuthConfigured()) return null;
-  return req.headers.get('oai-authenticated-user-id');
+  const user = req.headers.get('oai-authenticated-user-id');
+  const email = req.headers.get('oai-authenticated-user-email');
+  if (!user || !email) return null;
+  return user;
 }
 
 export const uid = () => crypto.randomUUID();
