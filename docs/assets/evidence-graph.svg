@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="360" viewBox="0 0 1200 360" role="img" aria-labelledby="title desc">
+  <title id="title">USCOO evidence graph</title>
+  <desc id="desc">A founder achievement is connected to personal contribution, verifiable outcome, source provenance, criterion lead, and next action.</desc>
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#101828"/>
+      <stop offset="1" stop-color="#1d3557"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="3" orient="auto">
+      <path d="M0,0 L9,3 L0,6 Z" fill="#8ec5ff"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="360" rx="28" fill="url(#bg)"/>
+  <text x="56" y="58" fill="#fff" font-family="Inter,Arial,sans-serif" font-size="28" font-weight="700">From scattered facts to a counsel-ready evidence graph</text>
+  <text x="56" y="88" fill="#b8c7dc" font-family="Inter,Arial,sans-serif" font-size="16">USCOO keeps contribution, provenance, uncertainty, and next action connected.</text>
+  <g font-family="Inter,Arial,sans-serif" font-size="15" font-weight="600" text-anchor="middle">
+    <g><rect x="42" y="160" width="160" height="74" rx="16" fill="#fff"/><text x="122" y="191" fill="#10233f">Achievement</text><text x="122" y="214" fill="#56708f" font-size="12">what happened</text></g>
+    <g><rect x="230" y="160" width="160" height="74" rx="16" fill="#dff3ff"/><text x="310" y="191" fill="#10233f">Contribution</text><text x="310" y="214" fill="#56708f" font-size="12">what I decided</text></g>
+    <g><rect x="418" y="160" width="160" height="74" rx="16" fill="#fff"/><text x="498" y="191" fill="#10233f">Outcome</text><text x="498" y="214" fill="#56708f" font-size="12">verifiable result</text></g>
+    <g><rect x="606" y="160" width="160" height="74" rx="16" fill="#dff3ff"/><text x="686" y="191" fill="#10233f">Source</text><text x="686" y="214" fill="#56708f" font-size="12">date · passage · verifier</text></g>
+    <g><rect x="794" y="160" width="160" height="74" rx="16" fill="#fff"/><text x="874" y="191" fill="#10233f">Criterion lead</text><text x="874" y="214" fill="#56708f" font-size="12">reviewable hypothesis</text></g>
+    <g><rect x="982" y="160" width="176" height="74" rx="16" fill="#ffc857"/><text x="1070" y="191" fill="#10233f">Next action</text><text x="1070" y="214" fill="#56708f" font-size="12">close the gap</text></g>
+  </g>
+  <g stroke="#8ec5ff" stroke-width="3" fill="none" marker-end="url(#arrow)">
+    <path d="M202 197 H226"/><path d="M390 197 H414"/><path d="M578 197 H602"/><path d="M766 197 H790"/><path d="M954 197 H978"/>
+  </g>
+  <text x="600" y="306" fill="#b8c7dc" font-family="Inter,Arial,sans-serif" font-size="15" text-anchor="middle">Beneficiary record + petitioner-company plan → coherent preparation workflow</text>
+</svg>
