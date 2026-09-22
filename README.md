@@ -1,6 +1,6 @@
 # USCOO
 
-Open-source O-1A preparation infrastructure for founders, self-petition teams, and immigration professionals.
+Open-source O-1A preparation infrastructure for founders filing through their own company, and immigration professionals.
 
 [Live product](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
@@ -40,6 +40,8 @@ pnpm dev
 
 The public assessment and marketing experience run without third-party API keys. The authenticated case workspace is designed for **ChatGPT Sites hosting** and trusts Sites-provided authentication headers. It also expects the `DB` D1 and `BUCKET` R2 bindings declared in `.openai/hosting.json`.
 
+Authenticated workspace access fails closed unless the Sites runtime sets `USCOO_SITES_AUTH_TRUSTED=true`. Never set this flag on a generic Cloudflare, Vercel, or other public deployment; replace the authentication adapter with a server-verified identity system first.
+
 For a complete backend verification without a hosted account:
 
 ```bash
@@ -54,6 +56,7 @@ The integration suite starts isolated local D1/R2 resources and uses synthetic i
 v0.1 is source-available as a complete product snapshot, but its deployment adapter is intentionally Sites-specific:
 
 - `app/chatgpt-auth.ts` reads authenticated-user headers injected by Sites.
+- The workspace accepts those headers only when `USCOO_SITES_AUTH_TRUSTED=true` is present in the trusted Sites runtime.
 - `lib/case-store.ts` reads D1, R2, and runtime values from Cloudflare bindings.
 - `.openai/hosting.json` contains placeholder binding names and **no production project ID**.
 

@@ -8,7 +8,8 @@ The v0.1 runtime is designed for Sites because it uses Sites authentication, D1,
 2. Copy the new project ID into `.openai/hosting.json`; keep the binding names `DB` and `BUCKET` unless you also update the code.
 3. Configure runtime values in the host settings, not in source control.
 4. Apply the SQL files in `drizzle/` to the deployment's D1 database in filename order.
-5. Build and test before publishing:
+5. Set `USCOO_SITES_AUTH_TRUSTED=true` in the Sites runtime settings. This is an explicit trust boundary: do not set it on a generic public host.
+6. Build and test before publishing:
 
    ```bash
    pnpm install --frozen-lockfile
@@ -17,7 +18,7 @@ The v0.1 runtime is designed for Sites because it uses Sites authentication, D1,
    pnpm test
    ```
 
-6. Test sign-in, a new case, file upload/download, share-link expiry, cross-user denial, and admin denial before inviting users.
+7. Test sign-in, a new case, file upload/download, share-link expiry, cross-user denial, and admin denial before inviting users.
 
 The checked-in project ID is deliberately a placeholder and cannot affect `uscoo.ai`.
 

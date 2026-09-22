@@ -1,5 +1,6 @@
 import { headers } from 'next/headers';
 import { redirect } from 'next/navigation';
+import { sitesAuthConfigured } from '@/lib/case-store';
 
 export type ChatGPTUser = {
   id: string;
@@ -19,6 +20,11 @@ const SIGN_OUT_PATH = '/signout-with-chatgpt';
 const CALLBACK_PATH = '/callback';
 
 export async function getChatGPTUser(): Promise<ChatGPTUser | null> {
+  if (!sitesAuthConfigured()) {
+    throw new Error(
+      'USCOO requires a trusted ChatGPT Sites runtime before authenticated workspace access is enabled.',
+    );
+  }
   const requestHeaders = await headers();
   const id = requestHeaders.get(USER_ID_HEADER);
   const email = requestHeaders.get(USER_EMAIL_HEADER);

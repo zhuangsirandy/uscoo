@@ -16,10 +16,27 @@ export const bindings = () =>
     OPENAI_MODEL?: string;
     MODEL_DAILY_LIMIT?: string;
     USCOO_ADMIN_USER_IDS?: string;
+    USCOO_SITES_AUTH_TRUSTED?: string;
     RESEND_API_KEY?: string;
     USCOO_EMAIL_FROM?: string;
   };
 export const now = () => new Date().toISOString();
+
+/**
+ * The oai-authenticated-user-* headers are only trustworthy when ChatGPT
+ * Sites injected them. A fork must explicitly opt in from its Sites runtime;
+ * the default is fail-closed so a normal public deployment cannot be fooled
+ * by a client-supplied header.
+ */
+export function sitesAuthConfigured() {
+  return bindings().USCOO_SITES_AUTH_TRUSTED === 'true';
+}
+
+export function trustedUserId(req: Request) {
+  if (!sitesAuthConfigured()) return null;
+  return req.headers.get('oai-authenticated-user-id');
+}
+
 export const uid = () => crypto.randomUUID();
 export const hash = async (value: string | ArrayBuffer) =>
   Array.from(
@@ -39,7 +56,12 @@ export const db = () => {
   return d;
 };
 export function identity(req: Request) {
-  const user = req.headers.get('oai-authenticated-user-id');
+  if (!sitesAuthConfigured())
+    throw new HttpError(
+      503,
+      '此工作台必须运行在已配置的 ChatGPT Sites 环境中。请先完成可信身份适配。',
+    );
+  const user = trustedUserId(req);
   if (!user) throw new HttpError(401, '请先登录，再打开申请项目。');
   return user;
 }
