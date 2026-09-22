@@ -4,9 +4,9 @@ Open-source O-1A preparation workspace for founders filing through their own com
 
 Turn scattered founder facts into an evidence graph, a petitioner-company work plan, reviewable drafts, and a counsel-ready record.
 
-![USCOO workspace overview](https://uscoo-founding-beta.sites.openai.com/og.png)
+![USCOO evidence graph](docs/assets/evidence-graph.svg)
 
-[Live Demo](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [60-second overview](docs/EVIDENCE_GRAPH.md#the-60-second-version) · [Golden Case #001-S](docs/GOLDEN_CASE_001-S.md) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+[Live Demo](https://www.uscoo.ai/?utm_source=github&utm_medium=referral&utm_campaign=open_source) · [60-second overview](docs/EVIDENCE_GRAPH.md#the-60-second-version) · [Golden Case #001-S](docs/GOLDEN_CASE_001-S.md) · [Citation](CITATION.cff) · [中文说明](#中文说明) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 USCOO turns a founder's scattered achievements into a structured preparation workflow: assess evidence against the O-1A criteria, identify gaps, organize source material, coordinate the petitioner company, generate reviewable working drafts, and hand a coherent record to counsel.
 
